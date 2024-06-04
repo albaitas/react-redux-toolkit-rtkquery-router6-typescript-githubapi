@@ -1,25 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import GithubPostList from './pages/GithubPostList';
+import GithubPostItem from './pages/GithubPostItem';
+import { SearchProvider } from './context/SearchContext';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <SearchProvider>
+      <Routes>
+        <Route path='/users' element={<GithubPostList />} />
+        <Route path='/users/:id' element={<GithubPostItem />} />
+        <Route path='*' element={<Navigate to='/users' />} />
+      </Routes>
+    </SearchProvider>
   );
 }
 
